@@ -1,0 +1,20 @@
+version: '2'
+services:
+    source:
+        image: datasource
+    zookeeper:
+        image: zookeeper
+        restart: always
+        hostname: zookeeper
+        ports:
+            - 2181:2181
+    kafka:
+        image: kafka
+        container_name: kafka
+        hostname: kafka
+        ports:
+          - "9092:9092"
+        depends_on:
+          - zookeeper
+    test:
+        image: spark1
