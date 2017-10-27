@@ -36,3 +36,13 @@ services:
         - 9160
       # volumes: # uncomment if you desire mounts, also uncomment cluster.sh
       #   - ./data/cassandra-2:/var/lib/cassandra:rw
+    portainer:
+        image: portainer/portainer
+        command: --templates http://templates/templates.json
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./portainer-data:/data
+        # Enable you to access potainers web interface from your host machine
+        # using http://localhost:10001
+        ports:
+            - "10001:9000"

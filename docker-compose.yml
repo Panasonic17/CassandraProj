@@ -18,3 +18,4 @@ services:
           - zookeeper
     test:
         image: spark1
+    
