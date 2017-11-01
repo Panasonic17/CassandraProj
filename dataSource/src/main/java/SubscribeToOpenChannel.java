@@ -8,7 +8,8 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 public class SubscribeToOpenChannel {
     static final String endpoint = "wss://open-data.api.satori.com";
     static final String appkey = "9fbd1c4BEa889C66cFf83B042B0fDCed";
-    static final String channel = "air-traffic";
+    static final String channel = "youtube-videos";
+    static int i = 0;
 
     public static void main(String[] args) throws InterruptedException {
         final RtmClient client = new RtmClientBuilder(endpoint, appkey)
@@ -26,10 +27,15 @@ public class SubscribeToOpenChannel {
             @Override
             public void onSubscriptionData(SubscriptionData data) {
                 for (AnyJson json : data.getMessages()) {
-                    ProducerRecord<String, String> air = new ProducerRecord<String, String>(
-                            "air", "air", json.toString());
-                 
-                    producer.send(air);
+                    ProducerRecord<String, String> youtube = new ProducerRecord<String, String>(
+                            "youtube", "youtube", json.toString());
+                    i++;
+                    System.out.println(i);
+                    if (i >= 1000) {
+                        System.out.println("send " + i);
+                        i = 0;
+                    }
+                    producer.send(youtube);
                 }
             }
         };
