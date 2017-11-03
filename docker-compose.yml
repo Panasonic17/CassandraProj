@@ -2,9 +2,12 @@ version: '2'
 services:
     source:
         image: datasource
+        container_name: source
+        hostname: source
     zookeeper:
         image: zookeeper
         restart: always
+        container_name: zookeeper
         hostname: zookeeper
         ports:
             - 2181:2181
@@ -16,6 +19,8 @@ services:
           - "9092:9092"
         depends_on:
           - zookeeper
-    test:
-        image: spark1
+    spark:
+        image: sparktocassandra
+        container_name: spark
+        hostname: spark
     

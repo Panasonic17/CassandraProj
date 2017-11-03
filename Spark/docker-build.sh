@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker build -t spark1 .
+docker build -t sparktocassandra .
