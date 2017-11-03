@@ -28,3 +28,5 @@ Spark/\.classpath
 Spark/.idea/
 dataSource/.idea/misc.xml
 dataSource/.idea/
+socetTestDataSender/.idea/
+socetTestDataSender/target/

@@ -5,6 +5,11 @@ import com.satori.rtm.model.*;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class SubscribeToOpenChannel {
     static final String endpoint = "wss://open-data.api.satori.com";
     static final String appkey = "9fbd1c4BEa889C66cFf83B042B0fDCed";
@@ -12,6 +17,8 @@ public class SubscribeToOpenChannel {
     static int i = 0;
 
     public static void main(String[] args) throws InterruptedException {
+
+
         final RtmClient client = new RtmClientBuilder(endpoint, appkey)
                 .setListener(new RtmClientAdapter() {
                     @Override
@@ -29,8 +36,8 @@ public class SubscribeToOpenChannel {
                 for (AnyJson json : data.getMessages()) {
                     ProducerRecord<String, String> youtube = new ProducerRecord<String, String>(
                             "youtube", "youtube", json.toString());
+
                     i++;
-                    System.out.println(i);
                     if (i >= 1000) {
                         System.out.println("send " + i);
                         i = 0;

@@ -1,19 +1,31 @@
 package test;
 
 
-import com.datastax.driver.core.*;
+import Consumers.SocetDSStream;
+import com.datastax.spark.connector.japi.rdd.CassandraJavaRDD;
+import org.apache.spark.SparkConf;
+import org.apache.spark.streaming.Durations;
+import org.apache.spark.streaming.api.java.*;
+
+
 
 public class main {
-    public static void main(String[] args) {
 
-        Cluster cluster1 = Cluster.builder().addContactPoint("172.20.0.2").build();
-        Session session = cluster1.connect("youtube");
+    public static void main(String[] args) throws InterruptedException {
+        SparkConf conf = new SparkConf().setMaster("local[*]").setAppName("youtube");
 
-        session.execute("INSERT INTO video_statistics (id,published_at,title,description,channel_title,view_count,like_count,dislike_count) VALUES ('id','published_at','title','description','channel_title',1,2,3)");
-        ResultSet results = session.execute("SELECT * FROM users WHERE id='id'");
-        for (Row row : results) {
-            System.out.print( row.getString(1)+"  "+row.getString(2));
-        }
+        JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(1));
 
+        JavaInputDStream<String>  dStream =new SocetDSStream().getDSSteam(jssc);
+
+        JavaDStream<String> words = dStream;
+        words.foreachRDD(a->{
+            System.out.println("Strat RDD");
+            a.foreach(a1-> System.out.println(a1));
+            System.out.println("End RDD");
+        } );
+
+        jssc.start();
+        jssc.awaitTermination();
     }
 }
