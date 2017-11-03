@@ -1,8 +1,7 @@
 package test;
 
 
-import Consumers.SocetDSStream;
-import com.datastax.spark.connector.japi.rdd.CassandraJavaRDD;
+import consumers.SocetDSStream;
 import org.apache.spark.SparkConf;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.*;
