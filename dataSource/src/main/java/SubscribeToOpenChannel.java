@@ -4,6 +4,7 @@ import com.satori.rtm.*;
 import com.satori.rtm.model.*;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.json.simple.parser.ParseException;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,7 +19,7 @@ public class SubscribeToOpenChannel {
 
     public static void main(String[] args) throws InterruptedException {
 
-
+JsonConventorToCsv convert=new JsonConventorToCsv();
         final RtmClient client = new RtmClientBuilder(endpoint, appkey)
                 .setListener(new RtmClientAdapter() {
                     @Override
@@ -34,8 +35,13 @@ public class SubscribeToOpenChannel {
             @Override
             public void onSubscriptionData(SubscriptionData data) {
                 for (AnyJson json : data.getMessages()) {
-                    ProducerRecord<String, String> youtube = new ProducerRecord<String, String>(
-                            "youtube", "youtube", json.toString());
+                    ProducerRecord<String, String> youtube = null;
+                    try {
+                        youtube = new ProducerRecord<String, String>(
+                                "youtube", "youtube",JsonConventorToCsv.convert(json.toString()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
                     i++;
                     if (i >= 1000) {

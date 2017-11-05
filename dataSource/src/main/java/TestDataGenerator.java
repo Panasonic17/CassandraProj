@@ -2,6 +2,7 @@ import com.satori.rtm.*;
 import com.satori.rtm.model.AnyJson;
 import com.satori.rtm.model.SubscriptionData;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.json.simple.parser.ParseException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,7 +16,7 @@ public class TestDataGenerator {
     static final String appkey = "9fbd1c4BEa889C66cFf83B042B0fDCed";
     static final String channel = "youtube-videos";
     static int i = 0;
-static int  rowCount=5000;
+    static int rowCount = 5000;
 
     private static final String FILENAME = "testDataSet.txt";
     static String[] data1 = new String[rowCount];
@@ -38,14 +39,20 @@ static int  rowCount=5000;
             @Override
             public void onSubscriptionData(SubscriptionData data) {
                 for (AnyJson json : data.getMessages()) {
-                    ProducerRecord<String, String> youtube = new ProducerRecord<String, String>(
-                            "youtube", "youtube", json.toString());
+                    String youtube= null;
+                    try {
+                        youtube = JsonConventorToCsv.convert(json.toString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
-                    data1[i] = youtube.value();
+                    System.out.println("add "+ i);
+                    data1[i] = youtube;
                     i++;
                     if (i >= rowCount) {
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME))) {
-                            for (String s: data1 ) {
+                            for (String s : data1) {
+                                System.out.println("add "+ i);
                                 bw.write(s + '\n');
                             }
                         } catch (IOException e) {

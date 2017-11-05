@@ -30,3 +30,16 @@ dataSource/.idea/misc.xml
 dataSource/.idea/
 socetTestDataSender/.idea/
 socetTestDataSender/target/
+
+SparkSacla/\.idea/
+
+test/\.idea/
+
+spark\+scala/\.idea/
+*.idea*
+*/tagret/*
+tagret/*
+.idea*
+*/tagret/*
+out/
+target/

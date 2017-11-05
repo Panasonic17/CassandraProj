@@ -1,8 +1,11 @@
 package test;
 
 
+import com.datastax.spark.connector.cql.CassandraConnector;
+import com.datastax.spark.connector.japi.DStreamJavaFunctions;
 import consumers.SocetDSStream;
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.*;
 
@@ -12,6 +15,9 @@ public class main {
 
     public static void main(String[] args) throws InterruptedException {
         SparkConf conf = new SparkConf().setMaster("local[*]").setAppName("youtube");
+        JavaSparkContext sc=new JavaSparkContext(conf);
+        DStreamJavaFunctions
+
 
         JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(1));
 

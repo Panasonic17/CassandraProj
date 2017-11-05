@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Server {
 
     static final String dataFile = "testDataSet.txt";
-    static final Integer sleepTime = 200;
+    static final Integer sleepTime = 330;
     static ArrayList<PrintWriter> outs = new ArrayList();
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -17,7 +17,7 @@ public class Server {
         Thread t=new Thread(s);
         t.setDaemon(true);
         t.start();
-
+        while(true){
         try (BufferedReader br = new BufferedReader(new FileReader(dataFile))) {
 
             String sCurrentLine;
@@ -29,6 +29,8 @@ public class Server {
                 Thread.sleep(sleepTime);
             }
 
+           }
+           outs= new ArrayList();
         }
 
     }
