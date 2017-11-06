@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Server {
 
-    static final String dataFile = "testDataSet.txt";
+    static final String dataFile = "testDataFrameCSV.txt";
     static final Integer sleepTime = 330;
     static ArrayList<PrintWriter> outs = new ArrayList();
 

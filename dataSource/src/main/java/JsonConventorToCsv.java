@@ -15,13 +15,14 @@ public class JsonConventorToCsv {
         JSONObject stat = (JSONObject) jsonObject.get("statistics");
         JSONObject snippet = (JSONObject) jsonObject.get("snippet");
         String description = snippet.get("description").toString().trim().replace("\n", "");
+//        System.out.println(description);
         row.append(jsonObject.get("id") + ",");
         row.append(stat.get("like_count") + ",");
         row.append(stat.get("dislike_count") + ",");
         row.append(stat.get("view_count") + ",");
         row.append(snippet.get("published_at") + ",");
-        row.append(snippet.get("title") + ",");
-        row.append(snippet.get("description") + ",");
+        row.append(snippet.get("title").toString().trim().replace("\n", "") + ",");
+        row.append(description + ",");
         row.append(snippet.get("channel_title") + ",");
         row.append(snippet.get("tags"));
 
