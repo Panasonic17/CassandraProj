@@ -17,10 +17,11 @@ public class main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Cluster cluster = Cluster.builder().addContactPoint("172.20.0.2").build();
-        Session session = cluster.connect("demo");
 
 
+
+            Cluster cluster = Cluster.builder().addContactPoint("cassandra-1").build();
+            Session session = cluster.connect("demo");
 
 
 //        SparkConf conf = new SparkConf().setMaster("local[*]").setAppName("youtube");
