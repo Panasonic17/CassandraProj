@@ -2,7 +2,7 @@ package test
 
 import model.Video
 import parsers.PraseVideoFromSatoriJson
-import spray.json.JsonParser
+//import spray.json.JsonParser
 //import play.api.libs.json.Json
 
 object JsonParseTest {

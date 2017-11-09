@@ -1,3 +1,4 @@
+import Convertors.JsonConvertorToCSVFromYoutubeVideos;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
@@ -17,7 +18,7 @@ public class TransformJsonData {
         fw = new FileWriter("testDataFrameCSV.txt");
         bw = new BufferedWriter(fw);
         while ((sCurrentLine = br.readLine()) != null) {
-            bw.write(JsonConventorToCsv.convert(sCurrentLine)+'\n');
+            bw.write(JsonConvertorToCSVFromYoutubeVideos.convert(sCurrentLine)+'\n');
         }
         br.close();
         fr.close();

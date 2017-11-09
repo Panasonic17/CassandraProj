@@ -1,7 +1,7 @@
 package parsers
 
 import model.{Snippet, Statistics, Video}
-import spray.json.JsonParser
+//import spray.json.JsonParser
 
 
 object PraseVideoFromSatoriJson {

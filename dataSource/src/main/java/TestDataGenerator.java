@@ -1,7 +1,7 @@
+import Convertors.JsonConvertorToCSVFromYoutubeVideos;
 import com.satori.rtm.*;
 import com.satori.rtm.model.AnyJson;
 import com.satori.rtm.model.SubscriptionData;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.json.simple.parser.ParseException;
 
 import java.io.BufferedWriter;
@@ -41,7 +41,7 @@ public class TestDataGenerator {
                 for (AnyJson json : data.getMessages()) {
                     String youtube= null;
                     try {
-                        youtube = JsonConventorToCsv.convert(json.toString());
+                        youtube = JsonConvertorToCSVFromYoutubeVideos.convert(json.toString());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

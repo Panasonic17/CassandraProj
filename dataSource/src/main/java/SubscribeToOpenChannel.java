@@ -1,25 +1,27 @@
 
 
+import Convertors.ConvertorFromJsonToCSV;
+import Convertors.JsonConvertorToCSVFromYoutube;
+import Convertors.JsonConvertorToCSVFromYoutubeVideos;
 import com.satori.rtm.*;
 import com.satori.rtm.model.*;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.json.simple.parser.ParseException;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class SubscribeToOpenChannel {
     static final String endpoint = "wss://open-data.api.satori.com";
     static final String appkey = "9fbd1c4BEa889C66cFf83B042B0fDCed";
-    static final String channel = "youtube-videos";
+    static String channel = "youtube-videos";
     static int i = 0;
 
     public static void main(String[] args) throws InterruptedException {
-
-JsonConventorToCsv convert=new JsonConventorToCsv();
+        final ConvertorFromJsonToCSV convertor;
+        if (channel.equals("youtube-videos"))
+            convertor = new JsonConvertorToCSVFromYoutubeVideos();
+        else
+            convertor = new JsonConvertorToCSVFromYoutube();
+        JsonConvertorToCSVFromYoutubeVideos convert = new JsonConvertorToCSVFromYoutubeVideos();
         final RtmClient client = new RtmClientBuilder(endpoint, appkey)
                 .setListener(new RtmClientAdapter() {
                     @Override
@@ -38,7 +40,7 @@ JsonConventorToCsv convert=new JsonConventorToCsv();
                     ProducerRecord<String, String> youtube = null;
                     try {
                         youtube = new ProducerRecord<String, String>(
-                                "youtube", "youtube",JsonConventorToCsv.convert(json.toString()));
+                                "youtube", "youtube", convertor.convert(json.toString()));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
