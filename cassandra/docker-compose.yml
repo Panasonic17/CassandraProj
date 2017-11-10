@@ -12,6 +12,8 @@ services:
       container_name: cassandra-1
       image: cassandra:latest
       command: /bin/bash -c "sleep 1 && echo ' -- Pausing to let system catch up ... -->' && /docker-entrypoint.sh cassandra -f"
+      ports:
+        - "9042:9042"
       expose:
         - 7000
         - 7001
@@ -26,6 +28,8 @@ services:
       container_name: cassandra-2
       image: cassandra:latest
       command: /bin/bash -c "sleep 30 && echo ' -- Pausing to let system catch up ... -->' && /docker-entrypoint.sh cassandra -f"
+      ports:
+        - "9042:9042"
       environment:
         - CASSANDRA_SEEDS=cassandra-1
       links:

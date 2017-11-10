@@ -1,16 +1,16 @@
-CREATE KEYSPACE youtube WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
+CREATE KEYSPACE market WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
 
-USE youtube;
+USE market;
 
-CREATE TABLE video_statistics (
-    id text,
-    published_at text,
-    title text,
-    description text,
-    channel_title text,
-    tags list<text>,
-    view_count int,
-    like_count int,
-    dislike_count int,
-    PRIMARY KEY ((channel_title),id)
+CREATE TABLE consumers (
+    consumer_id int,
+    name text,
+    PRIMARY KEY (consumer_id)
+);
+
+CREATE TABLE products (
+    product_id int,
+    name text,
+    price int,
+    PRIMARY KEY (product_id)
 );
