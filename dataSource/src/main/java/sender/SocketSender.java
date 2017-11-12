@@ -14,16 +14,21 @@ public class SocketSender implements DataSender<String> {
     Suport s = new Suport();
     Thread t = new Thread(s);
 
-    public SocketSender() throws Exception {
-        serverSocket = new ServerSocket(4444);
+    public SocketSender()  {
+        try {
+            serverSocket = new ServerSocket(4444);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         t.start();
     }
 
     @Override
     public void send(String data) {
-        for (PrintWriter out : outs) {
-            out.println(data);
-        }
+        System.out.println(data);
+//        for (PrintWriter out : outs) {
+//            out.println(data);
+//        }
     }
 
     //help to send data to all clients of Server

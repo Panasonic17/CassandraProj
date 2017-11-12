@@ -24,6 +24,7 @@ public class KafkaSender implements DataSender<ProducerRecord>{
 
     @Override
     public void send(ProducerRecord data) {
-          producer.send(data);
+        System.out.println(data);
+//          producer.send(data);
     }
 }
