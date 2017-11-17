@@ -14,7 +14,7 @@ public class SocketSender implements DataSender<String> {
     Suport s = new Suport();
     Thread t = new Thread(s);
 
-    public SocketSender()  {
+    public SocketSender() {
         try {
             serverSocket = new ServerSocket(4444);
         } catch (IOException e) {
@@ -23,9 +23,20 @@ public class SocketSender implements DataSender<String> {
         t.start();
     }
 
+    int j = 100000;
+
     @Override
     public void send(String data) {
-        System.out.println(data);
+//        System.out.println(data);
+        for (int i = 0; i < outs.size(); i++) {
+            if (j == 0) {
+                System.out.println("send 100000 masages");
+                j = 100000;
+            }
+            j--;
+            outs.get(i).println(data);
+
+        }
 //        for (PrintWriter out : outs) {
 //            out.println(data);
 //        }
